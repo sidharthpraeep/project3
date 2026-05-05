@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Node App</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <header class="header">
+      <h1>🚀 Node.js App</h1>
+      <p>Running on Kubernetes (EKS)</p>
+    </header>
+
+    <main class="card">
+      <h2>Application Status</h2>
+      <p id="status">Click the button to check server health</p>
+
+      <button onclick="checkHealth()">Check Health</button>
+    </main>
+
+    <footer>
+      <p>© 2026 DevOps Project</p>
+    </footer>
+
+  </div>
+
+  <script>
+    async function checkHealth() {
+      const statusEl = document.getElementById("status");
+      statusEl.innerText = "Checking...";
+
+      try {
+        const res = await fetch("/health");
+        const data = await res.text();
+        statusEl.innerText = data;
+      } catch (err) {
+        statusEl.innerText = "Server not reachable ❌";
+      }
+    }
+  </script>
+
+</body>
+</html>
